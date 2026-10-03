@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PMS Terminal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/app.css">
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="/"><span class="logo">PMS</span><span class="brand-sub">Terminal</span></a>
+    <div class="dateline" id="dateline"></div>
+    <div class="head-actions">
+      <span class="status" id="status"><span class="dot"></span><span class="txt">—</span></span>
+      <button class="btn ghost" id="btn-daily" title="Uruchom poranny brief teraz">Brief teraz</button>
+      <button class="btn primary" id="btn-ops" title="Dodaj operacje z XTB">+ Dodaj operacje</button>
+      <button class="btn ghost icon" id="btn-theme" title="Zmień motyw" aria-label="Zmień motyw">◐</button>
+    </div>
+  </header>
+
+  <div class="tape" aria-label="Notowania"><div class="tape-track" id="tape"></div></div>
+
+  <a class="breaking" id="breaking" hidden></a>
+
+  <form class="ask" id="ask">
+    <span class="ask-prompt">›</span>
+    <input id="ask-input" autocomplete="off" placeholder="Zapytaj o portfel, np. „Jak decyzja Fed wpływa na moje ETF-y i USD/PLN?”">
+    <button class="btn primary" type="submit">Analizuj</button>
+  </form>
+
+  <main id="view"></main>
+
+  <dialog class="ops" id="ops" aria-labelledby="ops-title">
+    <form method="dialog" class="ops-head"><h2 id="ops-title">Dodaj operacje</h2><button class="btn ghost icon" aria-label="Zamknij">✕</button></form>
+    <label class="field"><span>Rodzaj</span>
+      <select id="ops-kind">
+        <option value="transactions">Potwierdzenie transakcji XTB: PDF, mail (.eml), zrzut ekranu, CSV</option>
+        <option value="snapshot">Stan portfela: zastępuje wszystkie pozycje (zrzut xStation, CSV)</option>
+        <option value="manual">Wpis ręczny</option>
+      </select>
+    </label>
+    <div id="ops-upload">
+      <div class="drop" id="drop" tabindex="0">
+        <div class="drop-icon">⇪</div>
+        <div><b>Upuść pliki tutaj</b><br><span class="muted">PDF, PNG/JPG, CSV, EML, HTML, TXT · do 20 MB</span></div>
+        <button type="button" class="btn" id="pick">Wybierz z dysku</button>
+        <input type="file" id="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,.csv,.txt,.html,.htm,.eml,.json" hidden>
+      </div>
+      <p class="hint" id="ops-hint">Claude odczyta plik i doda transakcje do księgi. Duplikaty (ten sam numer zlecenia) są pomijane.</p>
+    </div>
+    <form id="ops-manual" class="manual" hidden>
+      <label class="field"><span>Symbol XTB</span><input name="symbol" required placeholder="np. NVDA.US, SNT.PL, SXR8.DE" autocomplete="off"></label>
+      <label class="field"><span>Strona</span><select name="side"><option value="BUY">Kupno</option><option value="SELL">Sprzedaż</option></select></label>
+      <label class="field"><span>Wolumen</span><input name="quantity" required inputmode="decimal" placeholder="0.5"></label>
+      <label class="field"><span>Cena</span><input name="price" required inputmode="decimal" placeholder="100.00"></label>
+      <label class="field"><span>Waluta</span><select name="currency"><option>PLN</option><option>USD</option><option>EUR</option><option>GBP</option><option>CHF</option></select></label>
+      <label class="field"><span>Data wykonania</span><input name="executedAt" type="datetime-local" required></label>
+      <button class="btn primary" type="submit">Dodaj transakcję</button>
+    </form>
+    <h3 class="ops-sub">Ostatnie importy</h3>
+    <ul class="jobs" id="ops-jobs"></ul>
+    <h3 class="ops-sub">Księga</h3>
+    <div id="ops-ledger" class="ledger"></div>
+  </dialog>
+
+  <footer class="foot">
+    Analizy generowane automatycznie przez Claude na podstawie publicznych źródeł. Prawdopodobieństwa to subiektywne szacunki, nie rekomendacja inwestycyjna.
+  </footer>
+  <script src="/assets/app.js" type="module"></script>
+</body>
+</html>

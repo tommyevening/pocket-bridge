@@ -1,0 +1,16 @@
+{
+  "name": "pocket-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "HeyPocket voice note -> webhook -> MacBook -> Claude + MCP -> HTML report in ~/xtb-news",
+  "scripts": {
+    "start": "node server.mjs",
+    "mcp": "node mcp-server.mjs",
+    "test:webhook": "node scripts/send-test-webhook.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "zod": "^3.25.0"
+  }
+}

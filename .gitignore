@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# secrets & local config
+.env
+
+# personal data: portfolio, transactions, reports, notes, inbox (lives on Google Drive / locally)
+pms/
+
+# runtime state & logs (commands contain transcripts)
+data/
+logs/
+
+# OS / editor
+.DS_Store
+*.tmp
