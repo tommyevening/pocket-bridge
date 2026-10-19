@@ -1,8 +1,8 @@
 # pocket-bridge / PMS
 
-Osobisty system do śledzenia portfela XTB. Łączy pytania głosowe z Pocketa, potwierdzenia transakcji z Gmaila,
-notatki na Dysku Google i newsy ze świata. Codziennie rano przygotowuje brief, a wszystko widać na stronie
-w stylu serwisu tradingowego.
+Personal system for tracking an XTB portfolio. It combines Pocket voice questions, Gmail transaction confirmations,
+Google Drive notes, and market news. Every morning it prepares a brief, and everything is visible on a
+trading-style web page.
 
 ```
 Główny Gmail ──(przekazanie)──▶ drugi Gmail ──Apps Script (co 5 min)──▶ Dysk: PMS/inbox/xtb/*.json + PDF
